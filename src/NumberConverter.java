@@ -2,43 +2,73 @@ import java.util.Arrays;
 
 public class NumberConverter {
     int[] digits;
+    String[] digitStr;
     int base;
     int num;
 
-    public NumberConverter(int number, int base) {
-        String numberAsString = Integer.toString(number);
-        num = number;
+    public NumberConverter(String number, int base) {
+        String numberAsString = (number);
         digits = new int[numberAsString.length()];
-        for (int i = 0; i < numberAsString.length(); i++) {
-            String single = numberAsString.substring(i,i+1);
-            int d = Integer.parseInt(single);
-            digits[i] = d;
-        }
         this.base = base;
+        digitStr = new String[numberAsString.length()];
+        for (int i = 0; i < numberAsString.length(); i++) {
+            String single = numberAsString.substring(i, i + 1);
+            digitStr[i] = single;
+        }
+        digits = convertToNum();
+        for (int i = 0; i < digits.length; i++) {
+            num += digits[i];
+        }
     }
 
     public String displayOriginalNumber() {
         String o = "";
-        for (int i = 0; i < digits.length; i++) {
-            o = o + digits[i];
+        for (int i = 0; i < digitStr.length; i++) {
+            o = o + digitStr[i];
         }
         o = o + "\n";
         return o;
     }
 
-    public int[] getDigits() {
+    public String[] getDigits() {
+        return digitStr;
+    }
+
+    public int[] convertToNum(){
+        for (int i = 0; i < digitStr.length; i++){
+            if (digitStr[i].equals("A")){
+                digits[i] = 10;
+            }
+            else if (digitStr[i].equals("B")){
+                digits[i] = 11;
+            }
+            else if (digitStr[i].equals("C")){
+                digits[i] = 12;
+            }
+            else if (digitStr[i].equals("D")){
+                digits[i] = 13;
+            }
+            else if (digitStr[i].equals("E")){
+                digits[i] = 14;
+            }
+            else if (digitStr[i].equals("F")){
+                digits[i] = 15;
+            }
+            else {
+                digits[i] = Integer.parseInt(digitStr[i]);
+            }
+        }
         return digits;
     }
 
     public int[] convertToDecimal() {
         int conversion = 0;
-        String num = "";
         int power = digits.length - 1;
         for (int i = 0; i < digits.length; i++) {
             conversion += digits[i] * Math.pow(base, power);
             power--;
         }
-        num = conversion + "";
+        String num = conversion + "";
         this.num = conversion;
         int [] decimal = new int[num.length()];
         for (int i = 0; i < num.length(); i++) {
@@ -124,6 +154,19 @@ public class NumberConverter {
             }
         }
         return hexStr;
+    }
+
+    public boolean inputChecker(String number){
+        boolean check = true;
+        if (base <= 10){
+            for (int i = 0; i < number.length(); i++){
+                int digit = Integer.parseInt(number.charAt(i) + "");
+                if (!((digit <  base) && (digit >= 0))){
+                    check = false;
+                }
+            }
+        }
+        return check;
     }
 }
 
