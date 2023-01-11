@@ -25,6 +25,10 @@ class ConverterRunner {
 
         System.out.print("Enter base you want to convert to: ");
         int convert = s.nextInt();
+        while (convert < 2 || convert > 64){
+            System.out.print("Enter a valid base12: ");
+            convert = s.nextInt();
+        }
 
         s.close();
 
@@ -33,10 +37,11 @@ class ConverterRunner {
             System.out.println("\n\nDigit array: " + Arrays.toString(digits));
             System.out.println("Number: " + nc.displayOriginalNumber());
             nc.convertToDecimal();
-            System.out.println("Conversion: " +  Arrays.toString(nc.converter(convert)));
-            System.out.println("Binary: " + Arrays.toString(nc.converter(2)));
-            System.out.println("Octal: " + Arrays.toString(nc.converter(8)));
-            System.out.println("Hex: " + Arrays.toString(nc.converter(16)));
+            System.out.println("Conversion: " +  nc.converter(convert));
+            System.out.println("\nDecimal: " + nc.converter(10));
+            System.out.println("Binary: " + nc.converter(2));
+            System.out.println("Octal: " + nc.converter(8));
+            System.out.println("Hex: " + nc.converter(16));
     }
 
     public static boolean isNumeric(String str) {

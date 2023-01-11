@@ -64,9 +64,10 @@ public class NumberConverter {
         return decimal;
     }
 
-    public String[] converter(int base) {
+    public String converter(int base) {
         int num = this.num;
         int count = 0;
+        String result = "";
         String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "+", "/"};
         String numbers = "";
         while (num >= 1) {
@@ -89,7 +90,10 @@ public class NumberConverter {
                 convertStr[i] = convert[i] + "";
             }
         }
-        return convertStr;
+        for (String str : convertStr){
+            result += str;
+        }
+        return result;
     }
 
     public static boolean inputChecker(String number, int base){
